@@ -219,11 +219,13 @@ function togglePause() {
 
 document.addEventListener("keydown", (event) => setKey(event, true));
 document.addEventListener("keyup", (event) => setKey(event, false));
-document.querySelector("#startButton").addEventListener("click", startGame);
-document.querySelector("#againButton").addEventListener("click", startGame);
-document.querySelector("#restartButton").addEventListener("click", startGame);
-ui.pause.addEventListener("click", togglePause);
-ui.sound.addEventListener("click", () => { soundOn = !soundOn; ui.sound.textContent = soundOn ? "♪" : "×"; });
+document.addEventListener("click", (event) => {
+  const target = event.target.closest?.("#startButton, #againButton, #restartButton, #pauseButton, #soundButton");
+  if (!target) return;
+  if (target.id === "pauseButton") togglePause();
+  else if (target.id === "soundButton") { soundOn = !soundOn; ui.sound.textContent = soundOn ? "♪" : "×"; }
+  else startGame();
+});
 
 document.querySelectorAll("[data-control]").forEach((button) => {
   const control = button.dataset.control;
