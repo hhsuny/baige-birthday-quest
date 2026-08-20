@@ -18,7 +18,7 @@ const ui = {
 const keys = { left: false, right: false, jump: false };
 let audioContext;
 let soundOn = true;
-let state = "running";
+let state = "intro";
 let lives = 3;
 let camera = 0;
 let lastTime = 0;
